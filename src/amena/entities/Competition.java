@@ -43,6 +43,9 @@ public class Competition {
         this.nbp = nbp;
     }
 
+    public Competition() {
+    }
+
     public int getId() {
         return id;
     }

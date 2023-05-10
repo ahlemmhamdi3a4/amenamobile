@@ -21,6 +21,7 @@ package amena.gui;
 
 import amena.entities.User;
 import amena.services.UserService;
+import static amena.util.Vars.current_user;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
@@ -57,9 +58,10 @@ public class ProfileForm extends SideMenuBaseForm {
         
         
         UserService u = new UserService();
-        User p = u.getUserById(73);
+        User p = u.getUserById(current_user.getId());
         System.out.println(p);
         String image=p.getImage();
+        
         System.out.println("imge "+image);
         ImageViewer imgv = new ImageViewer();
         

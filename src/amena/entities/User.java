@@ -43,6 +43,10 @@ public class User {
         this.image = image;
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(String cin, String adress, String nom, String prenom, String password, String email, String numtel, String image, String roles) {
         this.cin = cin;
         this.adress = adress;
@@ -221,8 +225,9 @@ public class User {
 
         this.password = password;
 
-        this.numtel = numtel;
+        
         this.adress = adress;
+        this.numtel = numtel;
         this.date_n = date_n;
     }
 

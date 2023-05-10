@@ -76,8 +76,9 @@ datePickerDeb.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.ST
                 cinField.getText(),
                 emailField.getText(),
                 passwordField.getText(),
+                 numtelField.getText(),
                 adressField.getText(),
-                numtelField.getText(),
+               
                 datePickerDeb.getDate()
         );
         if (UserService.getInstance().addUser(u)) {

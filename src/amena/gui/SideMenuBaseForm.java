@@ -27,6 +27,7 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 
 /**
@@ -64,9 +65,13 @@ public abstract class SideMenuBaseForm extends Form {
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Activity", FontImage.MATERIAL_TRENDING_UP,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Tasks", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
+        
+        getToolbar().addMaterialCommandToSideMenu("  Reservation vehicule", FontImage.MATERIAL_DASHBOARD,  e ->  new ReservationHome(UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Competition", FontImage.MATERIAL_DASHBOARD,  e ->  new BaseForm(UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new BaseForm1().show());
+        getToolbar().addMaterialCommandToSideMenu(" Confirmer Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new ConfirmerColis().show());
+        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UserListGUI(res).show());
+                getToolbar().addMaterialCommandToSideMenu("  Annonces", FontImage.MATERIAL_SETTINGS,  e -> new AjouterAnnonces(this).show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
     }
     

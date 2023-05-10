@@ -57,8 +57,8 @@ public class MyApplication {
 
    
 public void start() {
-    UserListGUI userListGUI = new UserListGUI(theme);
-    userListGUI.getForm().show();
+    //UserListGUI userListGUI = new UserListGUI(theme);
+   // userListGUI.getForm(this).show();
    new LoginForm(theme).show();
    //Form baseForm = new BaseForm();
      //   baseForm.show();

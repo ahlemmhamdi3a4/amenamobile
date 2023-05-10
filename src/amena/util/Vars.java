@@ -25,8 +25,5 @@ public class Vars {
     public static int unlock_oldMarker = 0;
     public static int unlock_newMarker = 0;
     public static String comment_user_name;
-    public static final String[] TYPE_LIST = {"Type 1", "Type 2", "Type 3"};
-    public static final String[] VILLE_LIST = {"Type 1", "Type 2", "Type 3"};
-    public static final String[] PICKER_TYPE_DATE_AND_TIME = {"Type 1", "Type 2", "Type 3"};
 
 }

@@ -8,7 +8,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
-import com.google.api.services.gmail.Gmail;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +21,7 @@ public class UserService {
 
     private static final String TEST_EMAIL = "aymen.zouaoui@esprit.tn";
 
-    private Gmail service;
+
     public static boolean resultOk = true;
     private static UserService instance = null;
     private ConnectionRequest req, con;
@@ -46,7 +46,8 @@ public class UserService {
         req.addArgument("prenom", u.getPrenom());
         req.addArgument("cin", u.getCin());
         req.addArgument("email", u.getEmail());
-        req.addArgument("password", u.getPassword());
+        String hash1 = hash(u.getPassword());
+        req.addArgument("password", hash1);
         req.addArgument("numtel", u.getNumtel());
         req.addArgument("adress", u.getAdress());
 
@@ -113,6 +114,7 @@ public class UserService {
                         u.setNom(map.get("nom").toString());
                         u.setPrenom(map.get("prenom").toString());
                         u.setAdress(map.get("adress").toString());
+                         u.setImage(map.get("image").toString());
 
                         //   u.setStatus(Boolean.parseBoolean(map.get("status").toString()));
                         userList.add(u);
@@ -148,7 +150,7 @@ public class UserService {
     public User getUserById(int id) {
         User u = new User();
         Map<String, Object> result;
-        String url = Vars.base_url + "/userm/" + 73;
+        String url = Vars.base_url + "/userm/" + id;
         /*req.setUrl(url);
         req.setPost(false);
         System.out.println("req");*/
@@ -224,13 +226,16 @@ public class UserService {
         NetworkManager.getInstance().addToQueue(req);
     }
 
-    public void Login(String username, String password) {
+    public boolean Login(String username, String password) {
         ConnectionRequest con = new ConnectionRequest();
         con.removeAllArguments();
         con.setPost(false);
         con.setUrl(Vars.base_url + "/loginm");
+
+        String hash1 = hash(password);
         con.addArgument("username", username);
-        con.addArgument("password", password);
+        con.addArgument("password", hash1);
+
         NetworkManager.getInstance().addToQueueAndWait(con);
 
         System.out.println("login username: " + username + " password: " + password);
@@ -245,9 +250,13 @@ public class UserService {
                 u = j.parseJSON(new CharArrayReader(json.toCharArray()));
                 List<Map<String, Object>> list = (List<Map<String, Object>>) u.get("root");
                 //System.out.println(list);
+                //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
                 System.out.println(list.get(0).get("nom").toString());
                 Vars.current_user = new User();
                 //System.out.println("nom: "+u);
+ //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
+ Vars.current_user.setId((int) Float.parseFloat(list.get(0).get("id").toString()));
+
                 Vars.current_user.setNom(list.get(0).get("nom").toString());
                 Vars.current_user.setPrenom(list.get(0).get("prenom").toString());
                 Vars.current_user.setEmail(list.get(0).get("email").toString());
@@ -259,11 +268,30 @@ public class UserService {
                 //Vars.current_user.setRoles(u.get("roles").toString());
                 // System.out.println("tel : "+u.get("telephone").toString());
                 System.out.println("connexion" + Vars.current_user);
+
+                // Verify password
+                String hashedPassword = hash(password);
+                if (hashedPassword.equals(list.get(0).get("password").toString())) {
+                     
+                    return true;
+                } else {
+                    Vars.current_user=null;
+                    return false;
+                }
             } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
 
+        return false;
+    }
+
+    public static String hash(String str) {
+        int hash = 7;
+        for (int i = 0; i < str.length(); i++) {
+            hash = hash * 31 + str.charAt(i);
+        }
+        return Integer.toHexString(hash);
     }
 
     /*  
