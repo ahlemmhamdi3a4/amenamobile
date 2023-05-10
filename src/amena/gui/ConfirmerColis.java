@@ -32,6 +32,7 @@ import amena.services.ColisCRUD;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.Log;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.FontImage;
 import com.codename1.util.Base64;
 
 import org.json.JSONObject;
@@ -165,7 +166,7 @@ public class ConfirmerColis extends Form {
     private Container colisContainer;
     private Label noColisLabel;
 
-    public ConfirmerColis() {
+    public ConfirmerColis(Form previous) {
         super("Liste des colis");
 
         // Initialisation de l'interface
@@ -221,6 +222,7 @@ public class ConfirmerColis extends Form {
         getContentPane().setScrollVisible(true);
         setScrollableY(true);
         setScrollableX(false);
+          getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 private void confirmDelivery(Colis colis) {
     // Affichage d'une popup de confirmation
@@ -246,6 +248,7 @@ private void confirmDelivery(Colis colis) {
                 "La livraison du colis " + colis.getNomDestinataire() + " a été confirmée avec succès!",
                 "OK", null);
     }
+    
 }
 
 }

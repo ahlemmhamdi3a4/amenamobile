@@ -21,7 +21,6 @@ public class UserService {
 
     private static final String TEST_EMAIL = "aymen.zouaoui@esprit.tn";
 
-
     public static boolean resultOk = true;
     private static UserService instance = null;
     private ConnectionRequest req, con;
@@ -46,8 +45,8 @@ public class UserService {
         req.addArgument("prenom", u.getPrenom());
         req.addArgument("cin", u.getCin());
         req.addArgument("email", u.getEmail());
-        String hash1 = hash(u.getPassword());
-        req.addArgument("password", hash1);
+
+        req.addArgument("password", u.getPassword());
         req.addArgument("numtel", u.getNumtel());
         req.addArgument("adress", u.getAdress());
 
@@ -114,7 +113,7 @@ public class UserService {
                         u.setNom(map.get("nom").toString());
                         u.setPrenom(map.get("prenom").toString());
                         u.setAdress(map.get("adress").toString());
-                         u.setImage(map.get("image").toString());
+                        u.setImage(map.get("image").toString());
 
                         //   u.setStatus(Boolean.parseBoolean(map.get("status").toString()));
                         userList.add(u);
@@ -232,9 +231,8 @@ public class UserService {
         con.setPost(false);
         con.setUrl(Vars.base_url + "/loginm");
 
-        String hash1 = hash(password);
         con.addArgument("username", username);
-        con.addArgument("password", hash1);
+        con.addArgument("password", password);
 
         NetworkManager.getInstance().addToQueueAndWait(con);
 
@@ -245,37 +243,39 @@ public class UserService {
         JSONParser j = new JSONParser();
         String json = new String(con.getResponseData()) + "";
         if (json.compareTo("Failed") > 0) {
+
             Map<String, Object> u;
+
             try {
                 u = j.parseJSON(new CharArrayReader(json.toCharArray()));
-                List<Map<String, Object>> list = (List<Map<String, Object>>) u.get("root");
+                System.out.println(u);
+                //List<Map<String, Object>> list = (List<Map<String, Object>>) u.get("root");
                 //System.out.println(list);
                 //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
-                System.out.println(list.get(0).get("nom").toString());
+                // System.out.println(list.get(0).get("nom").toString());
                 Vars.current_user = new User();
                 //System.out.println("nom: "+u);
- //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
- Vars.current_user.setId((int) Float.parseFloat(list.get(0).get("id").toString()));
+                //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
+                Vars.current_user.setId((int) Float.parseFloat(u.get("id").toString()));
 
-                Vars.current_user.setNom(list.get(0).get("nom").toString());
-                Vars.current_user.setPrenom(list.get(0).get("prenom").toString());
-                Vars.current_user.setEmail(list.get(0).get("email").toString());
-                Vars.current_user.setImage(list.get(0).get("image").toString());
-                Vars.current_user.setAdress(list.get(0).get("adress").toString());
-
-                Vars.current_user.setPrenom(list.get(0).get("prenom").toString());
-                Vars.current_user.setNumtel(list.get(0).get("numtel").toString());
+                Vars.current_user.setNom(u.get("nom").toString());
+                Vars.current_user.setPrenom(u.get("prenom").toString());
+                Vars.current_user.setEmail(u.get("email").toString());
+                Vars.current_user.setImage(u.get("image").toString());
+                Vars.current_user.setAdress(u.get("adress").toString());
+                Vars.current_user.setRoles(u.get("roles").toString());
+                Vars.current_user.setPrenom(u.get("prenom").toString());
+                Vars.current_user.setNumtel(u.get("numtel").toString());
                 //Vars.current_user.setRoles(u.get("roles").toString());
                 // System.out.println("tel : "+u.get("telephone").toString());
                 System.out.println("connexion" + Vars.current_user);
 
                 // Verify password
-                String hashedPassword = hash(password);
-                if (hashedPassword.equals(list.get(0).get("password").toString())) {
-                     
+                if (!(Vars.current_user == null)) {
+
                     return true;
                 } else {
-                    Vars.current_user=null;
+                    Vars.current_user = null;
                     return false;
                 }
             } catch (IOException ex) {
@@ -284,14 +284,6 @@ public class UserService {
         }
 
         return false;
-    }
-
-    public static String hash(String str) {
-        int hash = 7;
-        for (int i = 0; i < str.length(); i++) {
-            hash = hash * 31 + str.charAt(i);
-        }
-        return Integer.toHexString(hash);
     }
 
     /*  
@@ -307,4 +299,21 @@ private static String hashPassword(String password) {
     return encodedPassword;
 }
      */
+    public boolean resetPassword(String email) {
+        String url = Vars.base_url + "/reset-password/processSending";
+
+        req.setUrl(url);
+        req.setPost(true);
+        req.addArgument("email", email);
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                req.removeResponseListener(this);
+            }
+        });
+
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return req.getResponseCode() == 200;
+    }
 }

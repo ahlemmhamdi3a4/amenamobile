@@ -3,6 +3,7 @@ package com.mycompany.myapp;
 import amena.entities.User;
 import amena.gui.AddUserForm;
 import amena.gui.BaseForm;
+import amena.gui.ListAnnonce;
 import amena.gui.LoginForm;
 import amena.gui.UpdateUserForm;
 import amena.gui.UserListGUI;
@@ -58,8 +59,9 @@ public class MyApplication {
    
 public void start() {
     //UserListGUI userListGUI = new UserListGUI(theme);
-   // userListGUI.getForm(this).show();
+   //new ListAnnonce.getForm(this).show();
    new LoginForm(theme).show();
+   //new ListAnnonce(current).show();
    //Form baseForm = new BaseForm();
      //   baseForm.show();
 }

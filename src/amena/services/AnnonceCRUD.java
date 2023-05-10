@@ -72,20 +72,20 @@ public class AnnonceCRUD {
 
                 
                 annonce.setId(((Double) annonceMap.get("id")).intValue());
-                String type = annonceMap.get("Type").toString() ;
+                String type = annonceMap.get("type").toString() ;
                 annonce.setVilleDep(type);
-                String villeD = annonceMap.get("VilleDep").toString() ;
+                String villeD = annonceMap.get("ville_dep").toString() ;
                 annonce.setVilleDep(villeD);
                 
-                String villeA = annonceMap.get("VilleArr").toString() ;
+                String villeA = annonceMap.get("ville_arr").toString() ;
                 annonce.setVilleArr(villeA);
-                String DateD =annonceMap.get("DateDep").toString();
+                String DateD =annonceMap.get("date_dep").toString();
                 annonce.setDateDep(DateD);
-                String DateA = annonceMap.get("DateArr").toString() ; 
+                String DateA = annonceMap.get("date_arr").toString() ; 
                 annonce.setDateArr(DateA);
-                String Desc = annonceMap.get("Description").toString() ;  
+                String Desc = annonceMap.get("description").toString() ;  
                 annonce.setDescription(Desc);
-                annonce.setPrix(((Double) annonceMap.get("Prix")).intValue());
+                annonce.setPrix(((Double) annonceMap.get("prix")).intValue());
                 add.add(annonce);
             }
         } else {
@@ -101,7 +101,8 @@ public class AnnonceCRUD {
     String url = Vars.base_url + "/Json/annonce/new";
     ConnectionRequest req = new ConnectionRequest();
     req.setUrl(url);
-    req.setPost(true);
+    req.setPost(false);
+    // req.addArgument("idc", annonce.getType());
     req.addArgument("Type", annonce.getType());
     req.addArgument("VilleDep", annonce.getVilleDep());
     req.addArgument("VilleArr", annonce.getVilleArr());

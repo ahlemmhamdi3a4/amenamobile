@@ -14,6 +14,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 import amena.entities.Reservation;
 import amena.services.ServiceReservation;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.animations.CommonTransitions;
 import com.codename1.ui.layouts.LayeredLayout;
@@ -123,7 +124,7 @@ calendar.setSelectedDays(datesCollection);
     add(datePickerFin);
     add(btnValider);
     add(calendar);
-
+  getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 }
 
 }

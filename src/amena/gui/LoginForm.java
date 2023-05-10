@@ -53,14 +53,14 @@ public class LoginForm extends Form {
 
         getTitleArea().setUIID("Container");
 
-        Image profilePic = theme.getImage("user-picture.jpg");
+        Image profilePic = theme.getImage("logo.png");
         Image mask = theme.getImage("round-mask.png");
-        profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
+      //  profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
         Label profilePicLabel = new Label(profilePic, "ProfilePic");
         profilePicLabel.setMask(mask.createMask());
 
-        TextField login = new TextField("", "Login", 20, TextField.EMAILADDR);
-        TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
+        TextField login = new TextField("aymen.zouaoui97@gmail.com", "Login", 20, TextField.EMAILADDR);
+        TextField password = new TextField("Password1", "Password", 20, TextField.PASSWORD);
         login.getAllStyles().setMargin(LEFT, 0);
         password.getAllStyles().setMargin(LEFT, 0);
         Label loginIcon = new Label("", "TextField");
@@ -109,6 +109,18 @@ public class LoginForm extends Form {
             }}
 
         });
+       
+       Button ResetPasswordForm  = new Button("Reset password");
+        ResetPasswordForm.setUIID("Reset password");
+        ResetPasswordForm.addActionListener(e -> {
+            // Ajoouter l'utilisateur
+            //UserService.getInstance().addUser(u);
+
+            // Rediriger l'utilisateur vers la liste des utilisateurs
+            ResetPasswordForm addUserForm = new ResetPasswordForm();
+            addUserForm.show();
+
+        });
 
         Button createNewAccount = new Button("CREATE NEW ACCOUNT");
         createNewAccount.setUIID("CreateNewAccountButton");
@@ -139,7 +151,7 @@ public class LoginForm extends Form {
                 BorderLayout.center(password).
                         add(BorderLayout.WEST, passwordIcon),
                 loginButton,
-                createNewAccount
+                createNewAccount,ResetPasswordForm
         );
         add(BorderLayout.CENTER, by);
 

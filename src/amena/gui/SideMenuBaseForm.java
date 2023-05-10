@@ -19,16 +19,20 @@
 
 package amena.gui;
 
+import amena.util.Vars;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Container;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
 
 /**
  * Common code that can setup the side menu
@@ -36,7 +40,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public abstract class SideMenuBaseForm extends Form {
-
+ private EncodedImage palceHolder;
     public SideMenuBaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
@@ -53,11 +57,23 @@ public abstract class SideMenuBaseForm extends Form {
     }
     
     public void setupSideMenu(Resources res) {
-        Image profilePic = res.getImage("user-picture.jpg");
+       String image=Vars.current_user.getImage();
+        Image profilePic = null;
+        try {
+                    palceHolder = EncodedImage.create("/giphy.gif");
+                } catch (IOException ex) {
+
+                }
+                if(image!=null){
+                profilePic = URLImage.createToStorage(palceHolder, image, image);
+
+                }
+//        Image profilePic = res.getImage("user-picture.jpg");
+     
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label("  Jennifer Wilson", profilePic, "SideMenuTitle");
+        Label profilePicLabel = new Label(Vars.current_user.getNom(), profilePic, "SideMenuTitle");
         profilePicLabel.setMask(mask.createMask());
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
@@ -66,14 +82,15 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
         
-        getToolbar().addMaterialCommandToSideMenu("  Reservation vehicule", FontImage.MATERIAL_DASHBOARD,  e ->  new ReservationHome(UIManager.initFirstTheme("/theme2")).show());
-        getToolbar().addMaterialCommandToSideMenu("  Competition", FontImage.MATERIAL_DASHBOARD,  e ->  new BaseForm(UIManager.initFirstTheme("/theme2")).show());
-        getToolbar().addMaterialCommandToSideMenu("  Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new BaseForm1().show());
-        getToolbar().addMaterialCommandToSideMenu(" Confirmer Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new ConfirmerColis().show());
-        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UserListGUI(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation vehicule", FontImage.MATERIAL_DASHBOARD,  e ->  new ReservationHome(this,UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Competition", FontImage.MATERIAL_DASHBOARD,  e ->  new BaseForm(this,UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new BaseForm1(this).show());
+        getToolbar().addMaterialCommandToSideMenu(" Confirmer Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new ConfirmerColis(this).show());
+        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UserListGUI(this,res,Vars.current_user).show());
                 getToolbar().addMaterialCommandToSideMenu("  Annonces", FontImage.MATERIAL_SETTINGS,  e -> new AjouterAnnonces(this).show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
     }
     
     protected abstract void showOtherForm(Resources res);
+    
 }

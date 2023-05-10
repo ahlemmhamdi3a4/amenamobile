@@ -23,9 +23,33 @@ public class User {
     private String email;
 
     private String numtel;
+    private String score;
    private String image;
     private String roles;
     private Date date_n;
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, String password, String email, String numtel, String score, String image, String roles, Date date_n) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.password = password;
+        this.email = email;
+        this.numtel = numtel;
+        this.score = score;
+        this.image = image;
+        this.roles = roles;
+        this.date_n = date_n;
+    }
 
     public Date getDate_n() {
         return date_n;
@@ -185,8 +209,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", email=" + email + ", numtel=" + numtel + ", image=" + image + ", roles=" + roles + ", date_n=" + date_n + '}';
+        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", email=" + email + ", numtel=" + numtel + ", score=" + score + ", image=" + image + ", roles=" + roles + ", date_n=" + date_n + '}';
     }
+
 
     public User(int id, String cin, String adress, String nom, String prenom, String password, String email, String numtel, String image, String roles, Date date_n) {
         this.id = id;

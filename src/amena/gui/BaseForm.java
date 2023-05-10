@@ -9,6 +9,7 @@ import static com.codename1.push.PushContent.setTitle;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Button;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
@@ -21,7 +22,7 @@ import com.codename1.ui.util.Resources;
  */
 
 public class BaseForm extends Form {
-    public BaseForm(Resources res) {
+    public BaseForm(Form previous,Resources res) {
         setTitle("Home");
 
         Label titleLabel = new Label("Choose an Option");
@@ -50,5 +51,6 @@ public class BaseForm extends Form {
 
         add(BorderLayout.CENTER, inner);
         add(BorderLayout.SOUTH, new Label(""));
+         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 }

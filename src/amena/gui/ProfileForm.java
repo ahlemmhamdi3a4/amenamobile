@@ -21,7 +21,7 @@ package amena.gui;
 
 import amena.entities.User;
 import amena.services.UserService;
-import static amena.util.Vars.current_user;
+import amena.util.Vars;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
@@ -52,33 +52,25 @@ import java.io.IOException;
 public class ProfileForm extends SideMenuBaseForm {
     private EncodedImage palceHolder;
     public ProfileForm(Resources res) {
-        super(BoxLayout.y());
+       super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
-        
-        
-        UserService u = new UserService();
-        User p = u.getUserById(current_user.getId());
-        System.out.println(p);
-        String image=p.getImage();
-        
-        System.out.println("imge "+image);
-        ImageViewer imgv = new ImageViewer();
-        
+        String image=Vars.current_user.getImage();
+        Image profilePic = null;
         try {
                     palceHolder = EncodedImage.create("/giphy.gif");
                 } catch (IOException ex) {
 
                 }
                 if(image!=null){
-                URLImage urlImage = URLImage.createToStorage(palceHolder, image, image);
-                imgv.setImage(urlImage);
+                profilePic = URLImage.createToStorage(palceHolder, image, image);
+
                 }
-        Image profilePic = res.getImage("user-picture.jpg");
-        Image mask = res.getImage("round-mask.png");
+                
+         Image mask = res.getImage("round-mask.png");
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
         Label profilePicLabel = new Label(profilePic, "ProfilePicTitle");
-         profilePicLabel.setMask(mask.createMask());
+        profilePicLabel.setMask(mask.createMask());
 
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
@@ -100,10 +92,10 @@ public class ProfileForm extends SideMenuBaseForm {
                         FlowLayout.encloseIn(menuButton),
                         BorderLayout.centerAbsolute(
                                 BoxLayout.encloseY(
-                                    new Label(p.getNom()+" "+p.getPrenom(), "Title"),
-                                    new Label(p.getRoles(), "SubTitle")
+                                    new Label(Vars.current_user.getNom()+"  "+Vars.current_user.getPrenom(), "Title"),
+                                    new Label(Vars.current_user.getRoles(), "SubTitle")
                                 )
-                            ).add(BorderLayout.WEST, imgv),
+                            ).add(BorderLayout.WEST, profilePicLabel),
                         GridLayout.encloseIn(2, remainingTasks, completedTasks)
                 );
         
@@ -116,8 +108,8 @@ public class ProfileForm extends SideMenuBaseForm {
         
         FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);
         
-        addButtonBottom(arrowDown, "Finish landing page concept", 0xd997f1, true);
-        addButtonBottom(arrowDown, "Design app illustrations", 0x5ae29d, false);
+        addButtonBottom(arrowDown, "Mes Annonces", 0xd997f1, true);
+        addButtonBottom(arrowDown, "Mes Colis", 0x5ae29d, false);
         addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
         addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);
         setupSideMenu(res);

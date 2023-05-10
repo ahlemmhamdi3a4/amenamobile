@@ -30,7 +30,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 
 public class BaseForm1 extends Form {
-    public BaseForm1() {
+    public BaseForm1(Form previous) {
         setTitle("Home");
 
         Label titleLabel = new Label("Choissir une option");
@@ -56,5 +56,6 @@ public class BaseForm1 extends Form {
 
         add(BorderLayout.CENTER, inner);
         add(BorderLayout.SOUTH, new Label(""));
+          getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 }

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ReservationHome extends Form {
    public static int idv ;  
     Form current;
-    public ReservationHome(Resources res) {
+    public ReservationHome(Form previous,Resources res) {
         current=this;
            setTitle("Liste des vehicules");
         setLayout(BoxLayout.y());
@@ -54,7 +54,8 @@ public class ReservationHome extends Form {
         
          //SpanLabel sp = new SpanLabel();
         //sp.setText(ServiceVoyage.getInstance().affichageVoyage().toString());
-        this.add(list); 
+        this.add(list);
+          getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
        /* getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> {
         new ProfileForm(res,this).show();
         });*/
