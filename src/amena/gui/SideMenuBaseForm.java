@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package amena.gui;
 
 import amena.util.Vars;
@@ -40,7 +39,9 @@ import java.io.IOException;
  * @author Shai Almog
  */
 public abstract class SideMenuBaseForm extends Form {
- private EncodedImage palceHolder;
+
+    private EncodedImage palceHolder;
+
     public SideMenuBaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
@@ -55,21 +56,21 @@ public abstract class SideMenuBaseForm extends Form {
     public SideMenuBaseForm(Layout contentPaneLayout) {
         super(contentPaneLayout);
     }
-    
+
     public void setupSideMenu(Resources res) {
-       String image=Vars.current_user.getImage();
+        String image = Vars.current_user.getImage();
         Image profilePic = null;
         try {
-                    palceHolder = EncodedImage.create("/giphy.gif");
-                } catch (IOException ex) {
+            palceHolder = EncodedImage.create("/giphy.gif");
+        } catch (IOException ex) {
 
-                }
-                if(image!=null){
-                profilePic = URLImage.createToStorage(palceHolder, image, image);
+        }
+        if (image != null) {
+            profilePic = URLImage.createToStorage(palceHolder, image, image);
 
-                }
+        }
 //        Image profilePic = res.getImage("user-picture.jpg");
-     
+
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
@@ -78,19 +79,22 @@ public abstract class SideMenuBaseForm extends Form {
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
-        
+
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
-        
-        getToolbar().addMaterialCommandToSideMenu("  Reservation vehicule", FontImage.MATERIAL_DASHBOARD,  e ->  new ReservationHome(this,UIManager.initFirstTheme("/theme2")).show());
-        getToolbar().addMaterialCommandToSideMenu("  Competition", FontImage.MATERIAL_DASHBOARD,  e ->  new BaseForm(this,UIManager.initFirstTheme("/theme2")).show());
-        getToolbar().addMaterialCommandToSideMenu("  Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new BaseForm1(this).show());
-        getToolbar().addMaterialCommandToSideMenu(" Confirmer Colis", FontImage.MATERIAL_ACCESS_TIME,  e -> new ConfirmerColis(this).show());
-        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UserListGUI(this,res,Vars.current_user).show());
-                getToolbar().addMaterialCommandToSideMenu("  Annonces", FontImage.MATERIAL_SETTINGS,  e -> new AjouterAnnonces(this).show());
-        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Dashboard", FontImage.MATERIAL_DASHBOARD, e -> showOtherForm(res));
+
+        getToolbar().addMaterialCommandToSideMenu("  Reservation vehicule", FontImage.MATERIAL_DASHBOARD, e -> new ReservationHome(this, UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Competition", FontImage.MATERIAL_DASHBOARD, e -> new BaseForm(this, UIManager.initFirstTheme("/theme2")).show());
+        getToolbar().addMaterialCommandToSideMenu("  Colis", FontImage.MATERIAL_ACCESS_TIME, e -> new BaseForm1(this).show());
+        getToolbar().addMaterialCommandToSideMenu(" Confirmer Colis", FontImage.MATERIAL_ACCESS_TIME, e -> new ConfirmerColis(this).show());
+        getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS, e -> new UserListGUI(this, res, Vars.current_user).show());
+        getToolbar().addMaterialCommandToSideMenu("  Annonces", FontImage.MATERIAL_SETTINGS, e -> new AjouterAnnonces(this).show());
+        getToolbar().addMaterialCommandToSideMenu("  Annonces", FontImage.MATERIAL_SETTINGS, e -> new ListAnnonce(this).show());
+
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {new LoginForm(res).show();
+        Vars.current_user=null;});
     }
-    
+
     protected abstract void showOtherForm(Resources res);
-    
+
 }

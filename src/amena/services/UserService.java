@@ -49,6 +49,7 @@ public class UserService {
         req.addArgument("password", u.getPassword());
         req.addArgument("numtel", u.getNumtel());
         req.addArgument("adress", u.getAdress());
+        req.addArgument("roles", u.getRoles());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date_n = dateFormat.format(u.getDate_n());
@@ -164,7 +165,7 @@ public class UserService {
             } else {
                 System.out.println("user correct, password correct");
 
-                u.setId(id);
+               u.setId((int) Float.parseFloat(result.get("id").toString()));
                 u.setNom(result.get("nom").toString());
                 u.setRoles(result.get("roles").toString());
                 u.setPrenom(result.get("prenom").toString());
@@ -256,8 +257,10 @@ public class UserService {
                 Vars.current_user = new User();
                 //System.out.println("nom: "+u);
                 //Vars.current_user = new User((int) Float.parseFloat(u.get("id").toString()));
+               // Vars.current_user.setId((int) Float.parseFloat(u.get("id").toString()));
+                
                 Vars.current_user.setId((int) Float.parseFloat(u.get("id").toString()));
-
+                 System.out.println(Vars.current_user.getId());
                 Vars.current_user.setNom(u.get("nom").toString());
                 Vars.current_user.setPrenom(u.get("prenom").toString());
                 Vars.current_user.setEmail(u.get("email").toString());

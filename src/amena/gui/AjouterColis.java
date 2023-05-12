@@ -17,7 +17,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import amena.entities.Colis;
 import amena.services.ColisCRUD;
-
+import amena.util.Vars;
 
 import com.codename1.ui.Dialog;
 
@@ -28,12 +28,17 @@ public class AjouterColis extends Form {
         setLayout(BoxLayout.y());
 
         TextField tfNomExpediteur = new TextField("", "Nom Expediteur");
+        tfNomExpediteur.getStyle().setFgColor(0x000000);
         TextField tfAdresseExpediteur = new TextField("", "Adresse Expediteur");
+        tfAdresseExpediteur.getStyle().setFgColor(0x000000);
         TextField tfNomDestinataire = new TextField("", "Nom Destinataire");
+        tfNomDestinataire.getStyle().setFgColor(0x000000);
         TextField tfAdresseDestinataire = new TextField("", "Adresse Destinataire");
+        tfAdresseDestinataire.getStyle().setFgColor(0x000000);
         TextField tfPoids = new TextField("", "Poids");
+        tfPoids.getStyle().setFgColor(0x000000);
         Button btnValider = new Button("Add colis");
-
+       
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -50,7 +55,8 @@ public class AjouterColis extends Form {
                         colis.setNomDestinataire(tfNomDestinataire.getText());
                         colis.setAdresseDestinataire(tfAdresseDestinataire.getText());
                         colis.setPoids(poids);
-                        
+                        colis.setIdu(Vars.current_user.getId());
+
                         if (ColisCRUD.getInstance().addColis(colis)) {
                             Dialog.show("Success", "Colis added", new Command("OK"));
                         } else {
@@ -63,7 +69,7 @@ public class AjouterColis extends Form {
             }
         });
 
-        addAll(tfNomExpediteur, tfAdresseExpediteur, tfNomDestinataire, tfAdresseDestinataire, tfPoids,  btnValider);
+        addAll(tfNomExpediteur, tfAdresseExpediteur, tfNomDestinataire, tfAdresseDestinataire, tfPoids, btnValider);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
     }
 }

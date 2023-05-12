@@ -110,7 +110,7 @@ public class AnnonceCRUD {
     req.addArgument("DateArr", annonce.getDateArr());
     req.addArgument("Description", annonce.getDescription());
     req.addArgument("Prix", Float.toString(annonce.getPrix()));
-        
+        req.addArgument("id_u", Float.toString(annonce.getIdu())); 
   
     req.addResponseListener(new ActionListener<NetworkEvent>() {
         @Override
@@ -127,15 +127,14 @@ public class AnnonceCRUD {
     String url = Vars.base_url + annonce.getId() + "/Json/edita";
     ConnectionRequest req = new ConnectionRequest();
     req.setUrl(url);
-    req.setPost(true);
-    req.addArgument("Type", annonce.getType());
+    req.setPost(false);
+      req.addArgument("Type", annonce.getType());
     req.addArgument("VilleDep", annonce.getVilleDep());
     req.addArgument("VilleArr", annonce.getVilleArr());
     req.addArgument("DateDep", annonce.getDateDep());
     req.addArgument("DateArr", annonce.getDateArr());
     req.addArgument("Description", annonce.getDescription());
     req.addArgument("Prix", Float.toString(annonce.getPrix()));
-
      req.addResponseListener(new ActionListener<NetworkEvent>() {
         @Override
         public void actionPerformed(NetworkEvent evt) {

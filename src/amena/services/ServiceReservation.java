@@ -77,7 +77,7 @@ public boolean addReservation(Reservation reservation) {
 
         String date_fin = dateFormat.format(reservation.getDate_fin());
         req.addArgument("date_fin", date_fin);
-        
+        System.out.println("aaaaaaaaaaaaaa" +Vars.current_user.getId());
    req.addArgument("id_user", Integer.toString(Vars.current_user.getId()));
    req.addResponseListener(new ActionListener<NetworkEvent>() {
         @Override
@@ -115,7 +115,7 @@ public boolean addReservation(Reservation reservation) {
                         float id = Float.parseFloat(obj.get("id").toString());                        
                         String date_deb = obj.get("date_deb").toString();
                         String date_fin = obj.get("date_fin").toString();
-                       
+                       String etat = obj.get("etat").toString();
                          float idv =  Float.parseFloat(obj.get("idvehicule").toString());     
 
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
@@ -127,6 +127,7 @@ public boolean addReservation(Reservation reservation) {
                         Date date_finF = formatter.parse(date_fin);
                         
                         Reservation r = new Reservation((int)id,date_debD,date_finF,(int)idv);
+                        r.setEtat(etat);
                         //insert data into ArrayList result
                         result.add(r);
                        

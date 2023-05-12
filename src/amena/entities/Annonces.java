@@ -16,8 +16,19 @@ import java.util.Date;
  * @author Nour Saidi
  */
 public class Annonces {
-    private int id,Prix;
+    private int id,Prix,idu;
     private String Type,VilleDep,VilleArr,DateDep,DateArr,Description;
+
+    public Annonces(int Prix, int idu, String Type, String VilleDep, String VilleArr, String DateDep, String DateArr, String Description) {
+        this.Prix = Prix;
+        this.idu = idu;
+        this.Type = Type;
+        this.VilleDep = VilleDep;
+        this.VilleArr = VilleArr;
+        this.DateDep = DateDep;
+        this.DateArr = DateArr;
+        this.Description = Description;
+    }
 
     public Annonces() {
     }
@@ -90,6 +101,19 @@ public class Annonces {
 
     public void setDescription(String Description) {
         this.Description = Description;
+    }
+
+    public int getIdu() {
+        return idu;
+    }
+
+    public void setIdu(int idu) {
+        this.idu = idu;
+    }
+
+    @Override
+    public String toString() {
+        return "Annonces{" + "id=" + id + ", Prix=" + Prix + ", idu=" + idu + ", Type=" + Type + ", VilleDep=" + VilleDep + ", VilleArr=" + VilleArr + ", DateDep=" + DateDep + ", DateArr=" + DateArr + ", Description=" + Description + '}';
     }
     
 

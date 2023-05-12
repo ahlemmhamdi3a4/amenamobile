@@ -78,13 +78,13 @@ public class ProfileForm extends SideMenuBaseForm {
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
         
         Container remainingTasks = BoxLayout.encloseY(
-                        new Label("12", "CenterTitle"),
-                        new Label("remaining tasks", "CenterSubTitle")
+                        new Label("Score", "CenterTitle"),
+                        new Label(Vars.current_user.getScore(), "CenterSubTitle")
                 );
         remainingTasks.setUIID("RemainingTasks");
         Container completedTasks = BoxLayout.encloseY(
-                        new Label("32", "CenterTitle"),
-                        new Label("completed tasks", "CenterSubTitle")
+                        new Label("Mon numero de telephone", "CenterTitle"),
+                        new Label(Vars.current_user.getNumtel(), "CenterSubTitle")
         );
         completedTasks.setUIID("CompletedTasks");
 
@@ -110,8 +110,8 @@ public class ProfileForm extends SideMenuBaseForm {
         
         addButtonBottom(arrowDown, "Mes Annonces", 0xd997f1, true);
         addButtonBottom(arrowDown, "Mes Colis", 0x5ae29d, false);
-        addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
-        addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);
+       // addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
+       // addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);
         setupSideMenu(res);
     }
     

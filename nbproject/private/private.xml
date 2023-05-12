@@ -7,6 +7,8 @@
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/AjouterColis.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/ProfileForm.java</file>
             <file>jar:file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/lib/CodenameOne_SRC.zip!/com/codename1/ui/util/Resources.java</file>
+            <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/services/ServiceReservation.java</file>
+            <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/ModifierAnnonces.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/services/SserviceComp.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/UserListGUI.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/services/AnnonceCRUD.java</file>
@@ -17,6 +19,7 @@
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/entities/User.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/SideMenuBaseForm.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/LoginForm.java</file>
+            <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/gui/ReserverForm.java</file>
             <file>file:/C:/Users/aymen/Documents/NetBeansProjects/amenamobil_Copy/src/amena/util/Vars.java</file>
         </group>
     </open-files>

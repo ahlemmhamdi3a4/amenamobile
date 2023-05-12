@@ -12,6 +12,26 @@ public class Colis {
   private float poids;
   private String statut;
   private Date dateExpedition;
+   private int idu;
+
+    public int getIdu() {
+        return idu;
+    }
+
+    public void setIdu(int idu) {
+        this.idu = idu;
+    }
+
+    public Colis(String nomExpediteur, String adresseExpediteur, String nomDestinataire, String adresseDestinataire, float poids, String statut, Date dateExpedition, int idu) {
+        this.nomExpediteur = nomExpediteur;
+        this.adresseExpediteur = adresseExpediteur;
+        this.nomDestinataire = nomDestinataire;
+        this.adresseDestinataire = adresseDestinataire;
+        this.poids = poids;
+        this.statut = statut;
+        this.dateExpedition = dateExpedition;
+        this.idu = idu;
+    }
   
   
   public Colis() {
@@ -102,9 +122,11 @@ public class Colis {
   public void setDateExpedition(Date dateExpedition) {
     this.dateExpedition = dateExpedition;
   }
+
+    @Override
+    public String toString() {
+        return "Colis{" + "id=" + id + ", nomExpediteur=" + nomExpediteur + ", adresseExpediteur=" + adresseExpediteur + ", nomDestinataire=" + nomDestinataire + ", adresseDestinataire=" + adresseDestinataire + ", poids=" + poids + ", statut=" + statut + ", dateExpedition=" + dateExpedition + ", idu=" + idu + '}';
+    }
   
-@Override
-public String toString() {
-        return "Colis{" + "id=" + id + ", Nom Expediteur=" + nomExpediteur + ", Adresse Expediteur=" + adresseExpediteur + ", nomDestinataire="+nomDestinataire+", adresseDestinataire="+adresseDestinataire+", poids="+poids+", statut="+statut+", dateExpedition"+dateExpedition+"}/n";
-    } 
+
 }

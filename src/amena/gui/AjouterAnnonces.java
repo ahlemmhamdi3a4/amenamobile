@@ -16,6 +16,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import amena.services.AnnonceCRUD;
 import amena.entities.Annonces;
+import amena.util.Vars;
 
 
 import com.codename1.ui.Dialog;
@@ -26,12 +27,21 @@ public class AjouterAnnonces extends Form {
         setTitle("ajouter une nouvelle annonce");
         setLayout(BoxLayout.y());
         TextField tfType = new TextField("", "Type");
+        tfType.getStyle().setFgColor(0x000000);
+        
         TextField tfVilledep = new TextField("", "Ville de dep");
+        tfVilledep.getStyle().setFgColor(0x000000);
         TextField tfVillearr = new TextField("", "Ville d'arrivée");
+        tfVillearr.getStyle().setFgColor(0x000000);
         TextField tfDatedep = new TextField("", "Date de depart");
+        tfDatedep.getStyle().setFgColor(0x000000);
+        
         TextField tfDatearr = new TextField("", "Date d'arrivée");
+        tfDatearr.getStyle().setFgColor(0x000000);
         TextField tfDesc = new TextField("", "Description");
+        tfDesc.getStyle().setFgColor(0x000000);
         TextField tfPrix = new TextField("", "Prix");
+        tfPrix.getStyle().setFgColor(0x000000);
         Button btnValider = new Button("Ajouter Annonce");
 
         btnValider.addActionListener(new ActionListener() {
@@ -51,6 +61,7 @@ public class AjouterAnnonces extends Form {
                         annonce.setDateDep(tfDatedep.getText());
                         annonce.setDateArr(tfDatearr.getText());
                         annonce.setDescription(tfDesc.getText());
+                        annonce.setIdu(Vars.current_user.getId());
                        
                         if (AnnonceCRUD.getInstance().addAnnonce(annonce)) {
                             Dialog.show("Success", "annonce added", new Command("OK"));

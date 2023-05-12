@@ -93,6 +93,7 @@ public class ColisCRUD {
     req.addArgument("NomDestinataire", colis.getNomDestinataire());
     req.addArgument("AdresseDestinataire", colis.getAdresseDestinataire());
     req.addArgument("poids", Float.toString(colis.getPoids()));
+     req.addArgument("id_u", Float.toString(colis.getIdu()));
     
     if (colis.getDateExpedition() != null) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

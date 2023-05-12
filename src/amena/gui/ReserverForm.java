@@ -91,7 +91,7 @@ btnValider.getStyle().setBgColor(0x000000);
         selectedDateStyle.setFgColor(0xffffff); // set the foreground color to white
 
 for (Reservation lvs : lv) {
-    if(lvs.getIdVeh()==idv){
+    if(lvs.getIdVeh()==idv && lvs.getEtat().equals("Confirmée") ){
     Date db = lvs.getDate_deb(); 
     Date df = lvs.getDate_fin();
     

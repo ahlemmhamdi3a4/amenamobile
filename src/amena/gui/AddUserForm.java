@@ -3,6 +3,7 @@ package amena.gui;
 import amena.entities.User;
 import amena.services.UserService;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.ComponentGroup;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -20,6 +21,7 @@ public class AddUserForm extends Form {
 
     private TextField nomField, prenomField, cinField, emailField, passwordField, numtelField, adressField, date_n;
     private Button ajouterBtn;
+    private ComboBox<String> roleField;
 
     public AddUserForm(Resources res) {
         super(new BorderLayout());
@@ -39,6 +41,11 @@ public class AddUserForm extends Form {
         datePickerDeb.getStyle().setBgColor(0xFFFFFF); // set background color to white
         datePickerDeb.getStyle().setFgColor(0x000000); // set foreground color to black
         datePickerDeb.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_MEDIUM)); // set font style
+
+        // Create role check box
+        roleField = new ComboBox<>("Admin", "Transporteur", "Client");
+        roleField.setSelectedIndex(0);
+
         ajouterBtn = new Button("Ajouter");
 
         // Add components to a container
@@ -49,7 +56,9 @@ public class AddUserForm extends Form {
                 emailField,
                 passwordField,
                 numtelField,
-                adressField
+                adressField,
+                roleField // Add the role check box
+
         );
         fields.setScrollableY(true);
 
@@ -77,6 +86,19 @@ public class AddUserForm extends Form {
                         adressField.getText(),
                         datePickerDeb.getDate()
                 );
+                 // Set the user type based on the selected index of the role check box
+                switch (roleField.getSelectedIndex()) {
+                    case 0:
+                        u.setRoles("Admin");
+                        break;
+                    case 1:
+                         u.setRoles("trans");
+                        break;
+                    case 2:
+                        u.setRoles("User");
+                        break;
+                }
+                
                 if (UserService.getInstance().addUser(u)) {
                     Dialog.show("Succès", "Utilisateur ajouté avec succès!", "OK", null);
                     new LoginForm(res).show();
