@@ -89,13 +89,13 @@ public class AddUserForm extends Form {
                  // Set the user type based on the selected index of the role check box
                 switch (roleField.getSelectedIndex()) {
                     case 0:
-                        u.setRoles("Admin");
+                        u.setRoles("a");
                         break;
                     case 1:
-                         u.setRoles("trans");
+                         u.setRoles("b");
                         break;
                     case 2:
-                        u.setRoles("User");
+                        u.setRoles("c");
                         break;
                 }
                 

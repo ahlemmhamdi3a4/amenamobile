@@ -446,7 +446,7 @@ private EncodedImage palceHolder;
 //                    Annonce a1=new Annonce();
                     Vars.current_user=a;
                     System.out.println("testtt");
-                  UserListGUI afficherAnnonce=new UserListGUI(this,res,a);
+                  ProfileForm afficherAnnonce=new ProfileForm(res);
 //                  Form afficherAnnonceForm=afficherAnnonce.getAffichertAnnonceForm();
                   afficherAnnonce.show();
 //                    Form fa=afficher(a);

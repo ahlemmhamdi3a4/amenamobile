@@ -36,7 +36,7 @@ public class deleteAnnonce extends Form {
         btnSupprimer.addActionListener((ActionListener) (ActionEvent evt) -> {
             boolean deleted = AnnonceCRUD.getInstance().deleteAnnonce(AnnonceId);
             if (deleted) {
-                Dialog.show("Success", "Colis deleted", new Command("OK"));
+                Dialog.show("Success", "Annonce deleted", new Command("OK"));
                 previous.showBack();
             } else {
                 Dialog.show("ERROR", "Server error", new Command("OK"));
